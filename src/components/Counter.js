@@ -3,9 +3,12 @@ import { useSelector, useDispatch } from "react-redux";
 import classes from "./Counter.module.css";
 import { counterSliceActions } from "../store/store"; // imported our slice actions
 
+// since we are using multiple reducers for multiple slices, we shall call our counter slice
+// like this (state.counter.counter & state.counter.showCounter)
+
 const Counter = () => {
-  const counter = useSelector((state) => state.counter);
-  const show = useSelector((state) => state.showCounter);
+  const counter = useSelector((state) => state?.counter?.counter);
+  const show = useSelector((state) => state?.counter?.showCounter);
   const dispatch = useDispatch();
 
   const incrementHandler = () => {
@@ -13,7 +16,7 @@ const Counter = () => {
     dispatch(counterSliceActions.increase());
   };
   const decrementHandler = () => {
-    dispatch(counterSliceActions.decrease);
+    dispatch(counterSliceActions.decrease());
   };
 
   const addFiveHandler = () => {
